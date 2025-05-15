@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Calculator</title>
+</head>
+<body>
+    <h1>Enter Your Loan and Savings Details</h1>
+    <form action="{{ url_for('calculate') }}" method="post">
+        <label for="loan_type">Loan Type (2 or 5):</label><br>
+        <input type="number" name="loan_type" required><br>
+        <label for="annual_salary">Annual Salary (£):</label><br>
+        <input type="number" name="annual_salary" step="0.01" required><br>
+        <label for="inflation_rate">Inflation Rate (%):</label><br>
+        <input type="number" name="inflation_rate" step="0.01" required placeholder="Enter as 4.3 for 4.3%"><br>
+        <label for="salary_growth_rate">Salary Growth Rate (%):</label><br>
+        <input type="number" name="salary_growth_rate" step="0.01" required placeholder="Enter 1.2 for 1.2%"><br>
+        <label for="lump_sum_amount">Lump Sum Amount (£):</label><br>
+        <input type="number" name="lump_sum_amount" step="0.01" required><br>
+        <label for="savings_growth_rate">Savings Growth Rate (%):</label><br>
+        <input type="number" name="savings_growth_rate" step="0.01" required placeholder="Enter as 5 for 5%"><br>
+        <label for="debt_amount">Debt Amount (£):</label><br>
+        <input type="number" name="debt_amount" step="0.01" required><br>
+        <label for="graduation_year">Graduation Year:</label><br>
+        <input type="number" name="graduation_year" required><br>
+        <input type="submit" value="Calculate">
+    </form>
+</body>
+</html>
