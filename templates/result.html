@@ -1,19 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculation Result</title>
+  <meta charset="UTF-8" />
+  <title>Calculation Result</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f7f9fc;
+      color: #333;
+      margin: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    .graph-container {
+      margin-bottom: 40px;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .table-container {
+      overflow-x: auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px; /* adds vertical spacing between rows */
+      font-size: 16px;
+    }
+    thead th {
+      background-color: #007BFF;
+      color: white;
+      font-weight: 600;
+      padding: 12px 15px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      text-align: center;
+      border-radius: 12px 12px 0 0;
+      user-select: none;
+    }
+    tbody tr {
+      background: #fefefe;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    tbody tr:hover {
+      background: #e6f0ff;
+    }
+    tbody th {
+      font-weight: 600;
+      color: #2c3e50;
+      padding: 12px 15px;
+      text-align: left;
+      user-select: none;
+      border-left: 4px solid #007BFF;
+      border-radius: 8px 0 0 8px;
+      background: #f0f7ff;
+    }
+    tbody td {
+      padding: 12px 15px;
+      text-align: center;
+      color: #444;
+    }
+    .back-button {
+      display: block;
+      width: 160px;
+      margin: 30px auto 0 auto;
+      padding: 14px 0;
+      background-color: #007BFF;
+      color: white;
+      font-weight: 600;
+      text-align: center;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,123,255,0.3);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .back-button:hover {
+      background-color: #0056b3;
+      box-shadow: 0 6px 14px rgba(0,86,179,0.5);
+    }
+  </style>
 </head>
 <body>
-    <h1>Calculation Result</h1>
+  <h1>Calculation Results</h1>
 
-    <!-- Displays the chart image -->
-    <img src="{{ chart_url }}" alt="Chart Image">
+  <div class="graph-container">
+    {{ graph_html | safe }}
+  </div>
 
-    <!-- Button to go back to the main input page -->
-    <form action="{{ url_for('index') }}" method="get">
-        <button type="submit">Calculate Again</button>
-    </form>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          {% for header in column_headers %}
+            <th>{{ header }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+  {% for row in table_data %}
+    <tr>
+      <th>{{ row[0] }}</th>
+      {% for cell in row[1:] %}
+        <td>
+          {% if row[0] == "Loan Interest Rate" and cell is number %}
+            {{ "%.4f"|format(cell) }}
+          {% elif cell is number %}
+            {{ "%.2f"|format(cell) }}
+          {% else %}
+            {{ cell }}
+          {% endif %}
+        </td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</tbody>
+
+    </table>
+  </div>
+
+  <a href="/" class="back-button">Back to Input</a>
 </body>
 </html>

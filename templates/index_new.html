@@ -3,27 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Loan Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f7f9fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            margin-top: 30px;
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter Your Loan and Savings Details</h1>
-    <form action="{{ url_for('calculate') }}" method="post">
-        <label for="loan_type">Loan Type (2 or 5):</label><br>
-        <input type="number" name="loan_type" required><br>
-        <label for="annual_salary">Annual Salary (£):</label><br>
-        <input type="number" name="annual_salary" step="0.01" required><br>
-        <label for="inflation_rate">Inflation Rate (%):</label><br>
-        <input type="number" name="inflation_rate" step="0.01" required placeholder="Enter as 4.3 for 4.3%"><br>
-        <label for="salary_growth_rate">Salary Growth Rate (%):</label><br>
-        <input type="number" name="salary_growth_rate" step="0.01" required placeholder="Enter 1.2 for 1.2%"><br>
-        <label for="lump_sum_amount">Lump Sum Amount (£):</label><br>
-        <input type="number" name="lump_sum_amount" step="0.01" required><br>
-        <label for="savings_growth_rate">Savings Growth Rate (%):</label><br>
-        <input type="number" name="savings_growth_rate" step="0.01" required placeholder="Enter as 5 for 5%"><br>
-        <label for="debt_amount">Debt Amount (£):</label><br>
-        <input type="number" name="debt_amount" step="0.01" required><br>
-        <label for="graduation_year">Graduation Year:</label><br>
-        <input type="number" name="graduation_year" required><br>
-        <input type="submit" value="Calculate">
-    </form>
+    <div class="container">
+        <h1>Student Loan Calculator</h1>
+        <form action="{{ url_for('calculate') }}" method="post">
+            <label for="loan_type">Loan Type (2 or 5):</label>
+            <input type="number" name="loan_type" required>
+
+            <label for="annual_salary">Annual Salary (£):</label>
+            <input type="number" name="annual_salary" step="0.01" required>
+
+            <label for="inflation_rate">Inflation Rate (%):</label>
+            <input type="number" name="inflation_rate" step="0.01" required placeholder="e.g. 4.3">
+
+            <label for="salary_growth_rate">Salary Growth Rate (%):</label>
+            <input type="number" name="salary_growth_rate" step="0.01" required placeholder="e.g. 1.2">
+
+            <label for="lump_sum_amount">Lump Sum Amount (£):</label>
+            <input type="number" name="lump_sum_amount" step="0.01" required>
+
+            <label for="savings_growth_rate">Savings Growth Rate (%):</label>
+            <input type="number" name="savings_growth_rate" step="0.01" required placeholder="e.g. 5">
+
+            <label for="debt_amount">Debt Amount (£):</label>
+            <input type="number" name="debt_amount" step="0.01" required>
+
+            <label for="graduation_year">Graduation Year:</label>
+            <input type="number" name="graduation_year" required>
+
+            <input type="submit" value="Calculate">
+        </form>
+    </div>
 </body>
 </html>
+
